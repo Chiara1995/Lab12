@@ -22,6 +22,13 @@ public class TestModel {
 		System.out.println("Valore medio flusso per il fiume "+rivers.get(4).getName());
 		System.out.println(m.getAverageFlow(rivers.get(4).getId()));
 		
+		System.out.println();
+		System.out.println("Elenco misurazioni");
+		List<Flusso> ftemp=m.getFlows();
+		for(Flusso f : ftemp){
+			System.out.println(f);
+		}
+		
 	}
 
 }

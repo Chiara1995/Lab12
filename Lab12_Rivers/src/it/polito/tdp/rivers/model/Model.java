@@ -7,16 +7,29 @@ import it.polito.tdp.rivers.db.RiverDAO;
 
 public class Model {
 	
-	List<River> rivers;
-	RiverDAO rdao;
+	private List<River> rivers;
+	private List<Flusso> flows;
+	private RiverDAO rdao;
+	private RiverIdMap riverIdMap;
+	private FlussoIdMap flussoIdMap;
+	
 	
 	public Model(){
 		rdao=new RiverDAO();
+		riverIdMap=new RiverIdMap();
+		flussoIdMap=new FlussoIdMap();
+	}
+	
+	public List<Flusso> getFlows(){
+		if(flows==null){
+			flows=rdao.getAllFlows(flussoIdMap);
+		}
+		return flows;
 	}
 	
 	public List<River> getRivers(){
 		if(rivers==null){
-			rivers=rdao.getAllRivers();
+			rivers=rdao.getAllRivers(riverIdMap);
 		}
 		return rivers;
 	}
