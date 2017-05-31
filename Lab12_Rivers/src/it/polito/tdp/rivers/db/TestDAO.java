@@ -15,6 +15,17 @@ public class TestDAO {
 			System.out.println(r);
 		}
 		
+		System.out.println("Prima misurazione disponibile per il fiume "+rivers.get(0).getName());
+		System.out.println(rdao.getDateFirstMeasure(rivers.get(0).getId()));
+		
+		System.out.println("Ultima misurazione disponibile per il fiume "+rivers.get(0).getName());
+		System.out.println(rdao.getDateLastMeasure(rivers.get(0).getId()));
+		
+		System.out.println("Numero totale misurazioni per il fiume "+rivers.get(0).getName());
+		System.out.println(rdao.getNumberMeasures(rivers.get(0).getId()));
+		
+		System.out.println("Valore medio del flusso per il fiume "+rivers.get(0).getName());
+		System.out.println(rdao.getAverageFlow(rivers.get(0).getId()));
 		
 	}
 

@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
 
 public class RiversController {
 	
@@ -55,6 +56,31 @@ public class RiversController {
     	if(this.boxRiver.getItems().size()!=0){
     		this.boxRiver.setValue(model.getRivers().get(0));
     	}
+    }
+    
+    @FXML
+    void doDati(ActionEvent event) {
+    	this.txtEndDate.clear();
+    	this.txtFMed.clear();
+    	this.txtNumMeasurements.clear();
+    	this.txtResult.clear();
+    	this.txtStartDate.clear();
+    	if(this.boxRiver.getValue()==null){
+    		this.txtResult.setText("Selezionare un fiume nella comboBox.");
+    		return;
+    	}
+    	else{
+    		River r=this.boxRiver.getValue();
+    		this.txtStartDate.setText(model.getDateFirstMeasure(r.getId()).toString());
+    		this.txtEndDate.setText(model.getDateLastMeasure(r.getId()).toString());
+    		this.txtNumMeasurements.setText(String.valueOf(model.getNumberMesures(r.getId())));
+    		this.txtFMed.setText(String.valueOf(model.getAverageFlow(r.getId())));
+    		
+    	}
+    }
+    
+    @FXML
+    void doSimula(ActionEvent event) {
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
