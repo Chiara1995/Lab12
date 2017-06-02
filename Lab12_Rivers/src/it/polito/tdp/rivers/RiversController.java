@@ -53,9 +53,9 @@ public class RiversController {
     public void setModel(Model model){
     	this.model=model;
     	this.boxRiver.getItems().addAll(model.getRivers());
-    	if(this.boxRiver.getItems().size()!=0){
-    		this.boxRiver.setValue(model.getRivers().get(0));
-    	}
+//    	if(this.boxRiver.getItems().size()!=0){
+//    		this.boxRiver.setValue(model.getRivers().get(0));
+//    	}
     }
     
     @FXML
@@ -81,6 +81,26 @@ public class RiversController {
     
     @FXML
     void doSimula(ActionEvent event) {
+    	if(this.boxRiver.getValue()==null){
+    		this.txtResult.setText("Selezionare un fiume nella comboBox.");
+    		return;
+    	}
+    	River r=this.boxRiver.getValue();
+    	if(this.txtFMed.getText().isEmpty()){
+    		this.txtResult.setText("Errore: nessun flusso medio impostato.");
+    		return;
+    	}
+    	float fmed=Float.parseFloat(this.txtFMed.getText());
+    	if(this.txtK.getText().isEmpty()){
+    		this.txtResult.setText("Errore: nessun fattore k impostato.");
+    		return;
+    	}
+    	float k=Float.parseFloat(this.txtK.getText());
+    	if(k<=0){
+    		this.txtResult.setText("Errore: inserire un fattore k maggiore di zero.");
+    		return;
+    	}
+    	this.txtResult.setText(model.simulazione(r,fmed,k));    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

@@ -23,12 +23,11 @@ public class TestModel {
 		System.out.println(m.getAverageFlow(rivers.get(4).getId()));
 		
 		System.out.println();
-		System.out.println("Elenco misurazioni");
-		List<Flusso> ftemp=m.getFlows();
+		System.out.println("Elenco misurazioni del fiume "+rivers.get(0).getName());
+		List<Flusso> ftemp=m.getFlows(rivers.get(0).getId());
 		for(Flusso f : ftemp){
 			System.out.println(f);
 		}
-		
 	}
 
 }

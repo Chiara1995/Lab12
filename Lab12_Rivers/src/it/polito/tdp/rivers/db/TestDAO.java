@@ -3,7 +3,6 @@ package it.polito.tdp.rivers.db;
 import java.util.List;
 
 import it.polito.tdp.rivers.model.Flusso;
-import it.polito.tdp.rivers.model.FlussoIdMap;
 import it.polito.tdp.rivers.model.River;
 import it.polito.tdp.rivers.model.RiverIdMap;
 
@@ -32,9 +31,8 @@ public class TestDAO {
 		System.out.println(rdao.getAverageFlow(rivers.get(0).getId()));
 		
 		System.out.println();
-		System.out.println("Misurazioni");
-		FlussoIdMap flussoIdMap=new FlussoIdMap();
-		List<Flusso> ftemp=rdao.getAllFlows(flussoIdMap);
+		System.out.println("Misurazionizi del fiume "+rivers.get(0).getName());
+		List<Flusso> ftemp=rdao.getAllFlows(rivers.get(0).getId(), riverIdMap);
 		for(Flusso f : ftemp){
 			System.out.println(f);
 		}

@@ -8,23 +8,17 @@ import it.polito.tdp.rivers.db.RiverDAO;
 public class Model {
 	
 	private List<River> rivers;
-	private List<Flusso> flows;
 	private RiverDAO rdao;
 	private RiverIdMap riverIdMap;
-	private FlussoIdMap flussoIdMap;
 	
 	
 	public Model(){
 		rdao=new RiverDAO();
 		riverIdMap=new RiverIdMap();
-		flussoIdMap=new FlussoIdMap();
 	}
 	
-	public List<Flusso> getFlows(){
-		if(flows==null){
-			flows=rdao.getAllFlows(flussoIdMap);
-		}
-		return flows;
+	public List<Flusso> getFlows(int idRiver){
+		return rdao.getAllFlows(idRiver, riverIdMap);
 	}
 	
 	public List<River> getRivers(){
@@ -48,6 +42,19 @@ public class Model {
 	
 	public float getAverageFlow(int idRiver){
 		return rdao.getAverageFlow(idRiver);
+	}
+
+	public String simulazione(River r, float fmed, float k) {
+		Simulator simulator=new Simulator(k,fmed);
+		LocalDate ld = this.getFlows(r.getId()).get(0).getDay().minusDays(1);
+		for(Flusso f : this.getFlows(r.getId())){
+			ld.plusDays(1);
+			simulator.addFlusso(ld, f.getFlow());
+		}
+		simulator.run();
+		String result="Numero flussi in uscita non soddisfatti "+simulator.getNumero_giorni_insoddisfatti()+"\n";
+		result+="Occupazione media bacino "+simulator.getCmed();
+		return result;
 	}
 
 }
