@@ -61,10 +61,12 @@ public class Simulator {
 				//probabilità
 				float p=(float) Math.random();
 				//calcolo flusso out sulla base della probabilità
-				if(p<=0.05)
+				if(p<=0.05){
 					flusso_out+=this.f_out_min*10;
-				else
+				}
+				else{
 					flusso_out+=this.f_out_min;
+				}
 				C-=flusso_out;	
 				if(C<0){
 					this.numero_giorni_insoddisfatti++;
@@ -78,11 +80,11 @@ public class Simulator {
 				}
 				c_med.add(C);
 				System.out.println(e+"\n"+flusso_in+" "+flusso_out+" "+C);
-
+				
 				break;
 			default:
 				throw new IllegalArgumentException();
-			}
+			}			
 		}
 	}
 	
